@@ -20,18 +20,3 @@ class ChaCha20Encryption:
         decryptor = cipher.decryptor()
         plaintext = decryptor.update(ciphertext)
         return plaintext
-""" testing (remove later)
-if __name__ == "__main__":
-    key = os.urandom(32)
-    nonce = os.urandom(16)
-    message = b"Confidential message for transmission."
-
-    crypto = ChaCha20Encryption(key, nonce)
-    encrypted = crypto.encrypt(message)
-    decrypted = crypto.decrypt(encrypted)
-
-    print("Original :", message)
-    print("Encrypted:", encrypted.hex())
-    print("Decrypted:", decrypted)
-
-"""
