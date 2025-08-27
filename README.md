@@ -1,9 +1,19 @@
-# PPP-Protocal
+# Privacy Preserving Communication Protocol
 Project Overview
+This thesis presents the design and implementation of a privacy-preserving communication protocol for secure data transmission in resource-constrained environments, specifically in IoT networks. The system utilizes advanced cryptographic techniques, including
+ChaCha20 encryption, Elliptic Curve Diffie-Hellman (ECDH) key exchange, and HMAC
+authentication to ensure data confidentiality, integrity, and authentication. The protocol is designed to address the challenges of securing communication between devices in
+IoT networks, where low-power, low-latency, and efficient encryption are crucial.
+The MQTT protocol is employed for real-time message exchange, enabling efficient
+publish-subscribe communication between the IoT devices and the server. The system
+demonstrates end-to-end encryption, ensuring that data remains secure from interception and tampering during transmission. The key exchange mechanism based on ECDH
+enables the secure derivation of shared secrets, and the HMAC algorithm is used to
+authenticate the messages, preventing unauthorized access or modifications.
+The protocol is tested, where encrypted messages are successfully transmitted between
+the IoT device and the server. The system’s performance, security, and scalability
+are evaluated under different network conditions, demonstrating its suitability for realworld applications in secure messaging and IoT communications
 
-This project implements a secure, privacy-preserving communication protocol for Internet of Things (IoT) devices. The primary goal of this system is to secure communication between IoT devices and a server, ensuring data confidentiality, integrity, and authenticity. By using lightweight encryption techniques, this project optimizes performance while meeting the security requirements of IoT applications.
-
-##Key Features
+#Key Features
 
 ChaCha20 Encryption: A lightweight, high-performance encryption algorithm that is well-suited for resource-constrained IoT devices. It encrypts data in transit, ensuring confidentiality while maintaining low power consumption.
 
