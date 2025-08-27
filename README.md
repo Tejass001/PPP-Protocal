@@ -1,5 +1,4 @@
 # Privacy Preserving Communication Protocol
-Project Overview
 This thesis presents the design and implementation of a privacy-preserving communication protocol for secure data transmission in resource-constrained environments, specifically in IoT networks. The system utilizes advanced cryptographic techniques, including
 ChaCha20 encryption, Elliptic Curve Diffie-Hellman (ECDH) key exchange, and HMAC
 authentication to ensure data confidentiality, integrity, and authentication. The protocol is designed to address the challenges of securing communication between devices in
