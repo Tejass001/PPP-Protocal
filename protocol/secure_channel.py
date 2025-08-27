@@ -6,12 +6,6 @@ from encryption.chacha20_encryption import ChaCha20Encryption
 from authentication.hmac_auth import HMACAuth
 
 class SecureChannel:
-    """
-    Wraps ECDH + key derivation + ChaCha20 + HMAC for a simple API.
-    Message format for 'encrypt_and_authenticate':
-        payload = nonce(16) || ciphertext || tag(32)
-    MAC is computed over (nonce || ciphertext).
-    """
 
     def __init__(self):
         self.ecdh = ECDHKeyExchange()
@@ -20,11 +14,11 @@ class SecureChannel:
 
     #  Key exchange
     def get_public_key_pem(self) -> bytes:
-        """Return our public key (PEM) bytes."""
+
         return self.ecdh.get_serialized_public_key()
 
     def set_peer_public_key_pem(self, peer_pem: bytes):
-        """Load peer public key (PEM) and derive shared secret -> symmetric keys."""
+
         peer_public_key = serialization.load_pem_public_key(peer_pem)
         shared = self.ecdh.generate_shared_secret(peer_public_key)
         self._derive_symmetric_keys(shared)
@@ -40,7 +34,7 @@ class SecureChannel:
 
     #  Data plane
     def encrypt_and_authenticate(self, plaintext: bytes) -> bytes:
-        """Return nonce||ciphertext||hmac_tag."""
+
         if not self.ready():
             raise RuntimeError("SecureChannel is not ready (keys not derived).")
         nonce = os.urandom(16)
@@ -50,7 +44,7 @@ class SecureChannel:
         return nonce + ct + tag
 
     def decrypt_and_verify(self, payload: bytes) -> bytes | None:
-        """Verify HMAC and return plaintext, or None if HMAC fails."""
+
         if not self.ready():
             raise RuntimeError("SecureChannel is not ready (keys not derived).")
         if len(payload) < 16 + 32:
@@ -62,29 +56,3 @@ class SecureChannel:
             return None
         return ChaCha20Encryption(self._enc_key, nonce).decrypt(ct)
 
-
-""" Example test
-if __name__ == "__main__":
-    # Alice and Bob
-    alice = SecureChannel()
-    bob = SecureChannel()
-
-    # Exchange public keys
-    alice_pub = alice.generate_public_key()
-    bob_pub = bob.generate_public_key()
-
-    # Derive shared keys
-    alice.derive_keys(bob_pub)
-    bob.derive_keys(alice_pub)
-
-    # Alice sends message
-    msg = b"Top secret message from Alice to Bob"
-    nonce, ciphertext, tag = alice.encrypt_and_authenticate(msg)
-
-    # Bob receives message
-    try:
-        plaintext = bob.decrypt_and_verify(nonce, ciphertext, tag)
-        print("Decrypted message:", plaintext)
-    except ValueError as e:
-        print("Security error:", str(e))
-"""
