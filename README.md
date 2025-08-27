@@ -12,7 +12,7 @@ The protocol is tested, where encrypted messages are successfully transmitted be
 the IoT device and the server. The system’s performance, security, and scalability
 are evaluated under different network conditions, demonstrating its suitability for realworld applications in secure messaging and IoT communications
 
-#Key Features
+## Key Features
 
 ChaCha20 Encryption: A lightweight, high-performance encryption algorithm that is well-suited for resource-constrained IoT devices. It encrypts data in transit, ensuring confidentiality while maintaining low power consumption.
 
@@ -22,11 +22,11 @@ HMAC for Integrity: A Hash-Based Message Authentication Code (HMAC) ensures that
 
 MQTT Protocol: A lightweight messaging protocol used for secure communication between IoT devices and the server. MQTT ensures efficient data transmission with minimal overhead.
 
-##Architecture
+## Architecture
 
 The architecture consists of a Raspberry Pi-based IoT device, which communicates with a server using MQTT. The IoT device generates sensor data, encrypts it using ChaCha20, performs key exchange with the server using ECDH, and transmits the encrypted data over MQTT. The server then decrypts the data, verifies its integrity using HMAC, and processes it for further action.
 
-##Technologies Used
+## Technologies Used
 
 Programming Languages: Python 3.xChallenges Faced
 
@@ -36,13 +36,13 @@ Secure and lightweight key exchange for maintaining session integrity without co
 
 Ensuring MQTT broker configuration for secure communication.
 
-##Future Work
+## Future Work
 
 Extend the protocol to handle more complex IoT systems with a larger number of devices.
 
 Investigate post-quantum cryptographic solutions for future-proofing against quantum computing threats.
 
-##Contact Information
+## Contact Information
 
 For more details or questions, feel free to contact the project maintainer at: Tejass001@github.com
 
